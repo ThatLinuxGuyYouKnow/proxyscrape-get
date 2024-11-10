@@ -36,6 +36,10 @@ cd proxyscrape-get && python3 app.py
 - [ ] return viable proxies as a list
 - [ ] add optioning to reduce noisy logging
 
+
+And finally,
+
+
 > [!TIP]
 > A proxy works deemed viable won't necesarily work on the specific paltform you'd like to use it on, may be best to edit the script for specific use cases.
 
