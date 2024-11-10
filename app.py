@@ -17,7 +17,7 @@ def testProxy(proxy):
             'https': f'http://{proxy}'  # Use http:// even for HTTPS connections
         }
         
-        proxy_check = "https://sofascore.com.com"
+        proxy_check = "https://sofascore.com"
         test_response = requests.get(
             url=proxy_check, 
             proxies=proxies, 
