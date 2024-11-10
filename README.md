@@ -9,4 +9,25 @@ A simple python script to test for currently viable proxies from [proxyscrapes p
 * returns viable proxies[TODO]
 * verbose logging
 
+## Like this? Clone this repository !
+
+But first, make sure you have:
+
+> Python 3.+
+> The requests package
+
+And now you can:
+
+```
+git clone github.com/ThatLinuxGuyYouKnow/proxyscrape-get
+
+```
+
+### Run this
+
+```
+cd proxyscrape-get && python3 app.py
+
+```
+
 
