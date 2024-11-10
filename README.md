@@ -1,6 +1,6 @@
 # ProxyScrape - Get
 
-### A simple python script to test for currently viable proxies from [proxyscrapes proxy list]('https://proxyscrape.com/free-proxy-list').
+A simple python script to test for currently viable proxies from [proxyscrapes proxy list]('https://proxyscrape.com/free-proxy-list').
 
 ## Features
 
