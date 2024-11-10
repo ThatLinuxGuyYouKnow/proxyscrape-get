@@ -5,7 +5,7 @@ A simple python script to test for currently viable proxies from [proxyscrapes p
 ## Features
 
 * Automatically removes empty and duplicate proxies
-* checks proxies vs [Sofascore]('https://sofascore.com') probably one of the *strictest* anti bot platforms(if it works there, it'll work on most other platforms)
+* checks proxies vs [Sofascore]('https://sofascore.com') probably one of the *strictest* anti bot platforms(if it works there, it'll *probably* work on most other platforms)
 * returns viable proxies[TODO]
 * verbose logging
 
@@ -13,21 +13,20 @@ A simple python script to test for currently viable proxies from [proxyscrapes p
 
 But first, make sure you have:
 
-> Python 3.+
-> The requests package
+> Python 3.+ 
+and
+> The requests library
 
 And now you can:
 
 ```
 git clone github.com/ThatLinuxGuyYouKnow/proxyscrape-get
-
 ```
 
 ### Run this
 
 ```
 cd proxyscrape-get && python3 app.py
-
 ```
 
 
