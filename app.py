@@ -2,16 +2,16 @@ import json
 import random
 import requests
 from requests.exceptions import ProxyError
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
-def testProxy(proxy):
+def test_proxy(proxy):
     try:
         print('Testing proxy: ' + proxy)
-        
         # Remove protocol prefix if present
         if '://' in proxy:
             proxy = proxy.split('://')[-1]
-        
-        # Properly format the proxy dict
+            
+     
         proxies = {
             'http': f'http://{proxy}',
             'https': f'http://{proxy}'  # Use http:// even for HTTPS connections
@@ -19,28 +19,28 @@ def testProxy(proxy):
         
         proxy_check = "https://sofascore.com"
         test_response = requests.get(
-            url=proxy_check, 
-            proxies=proxies, 
+            url=proxy_check,
+            proxies=proxies,
             timeout=10,
             verify=False
         )
         
         if test_response.status_code == 200:
             print(f"Proxy {proxy} works")
-            return True
+            return proxy, True
         else:
             print(f"Proxy doesn't work")
-            return False
+            return proxy, False
             
     except requests.exceptions.ProxyError as e:
         print(f"Proxy error: {e}")
-        return False
+        return proxy, False
     except requests.exceptions.ConnectTimeout:
         print(f"Connection timeout")
-        return False
+        return proxy, False
     except requests.exceptions.RequestException as e:
         print(f"Error testing proxy: {e}")
-        return False
+        return proxy, False
 
 def main():
     try:
@@ -56,12 +56,17 @@ def main():
             return
             
         print(f"Found {len(proxies)} proxies")
-        
-        # Test each proxy
+
         working_proxies = []
-        for proxy in proxies[:20]:  # Test first 5 proxies
-            if testProxy(proxy):
-                working_proxies.append(proxy)
+        with ThreadPoolExecutor(max_workers=5) as executor:
+            # Submit all tasks and get futures
+            future_to_proxy = {executor.submit(test_proxy, proxy): proxy for proxy in proxies[:20]}
+            
+           
+            for future in as_completed(future_to_proxy):
+                proxy, is_working = future.result()
+                if is_working:
+                    working_proxies.append(proxy)
         
         if working_proxies:
             print(f"\nFound {len(working_proxies)} working proxies:")
@@ -69,7 +74,7 @@ def main():
                 print(f"- {proxy}")
         else:
             print("\nNo working proxies found")
-        
+            
     except requests.exceptions.RequestException as e:
         print(f"Error fetching proxy list: {e}")
     except Exception as e:
