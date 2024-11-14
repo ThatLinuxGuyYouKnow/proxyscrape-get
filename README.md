@@ -32,7 +32,7 @@ cd proxyscrape-get && python3 app.py
 ```
 
 ## TODO's
-- [ ] test proxies concurrently
+- [x] test proxies concurrently
 - [ ] return viable proxies as a list
 - [ ] add optioning to reduce noisy logging
 
